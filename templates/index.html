@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Pro | Firewall de Grado Bancario</title>
+    <style>
+        body { background-color: #050505; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
+        
+        /* Encabezado Profesional */
+        .header { background: #111; padding: 15px; border-bottom: 2px solid #00ff41; text-align: center; letter-spacing: 2px; font-weight: bold; }
+        
+        /* Monitor de IA en Tiempo Real */
+        .monitor-container { margin: 20px; }
+        .monitor { background: rgba(0, 255, 65, 0.05); border: 1px solid #00ff41; padding: 15px; height: 180px; overflow-y: hidden; font-size: 0.85em; box-shadow: inset 0 0 10px #00ff41; }
+        .alert { color: #ff3e3e; font-weight: bold; text-shadow: 0 0 5px #ff0000; }
+        
+        /* Tarjeta de Venta */
+        .sales-card { border: 2px solid #00ff41; background: #111; padding: 30px; width: 85%; max-width: 400px; margin: 20px auto; text-align: center; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); }
+        .price { font-size: 2em; color: #fff; margin: 10px 0; }
+        .timer { color: #ffcc00; font-size: 1.1em; margin-bottom: 20px; }
+        
+        /* Botón de Pago Directo */
+        .btn-buy { background: #00ff41; color: #000; border: none; padding: 20px 40px; font-size: 1.2em; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
+        .btn-buy:hover { background: #fff; box-shadow: 0 0 30px #00ff41; }
+
+        .features { text-align: left; font-size: 0.9em; margin: 20px 0; list-style: none; padding: 0; }
+        .features li::before { content: "✓ "; }
+    </style>
+</head>
+<body>
+
+    <div class="header">SYSTEM STATUS: {{ estado }}</div>
+
+    <div class="monitor-container">
+        <label>[ NÚCLEO DE IA: MONITOREO DE TRÁFICO GLOBAL ]</label>
+        <div class="monitor" id="log">
+            [INFO] Inicializando Sentinel Pro v1.0...<br>
+            [INFO] Cargando algoritmos de detección de anomalías...<br>
+            [OK] Conexión con nodos bancarios establecida.<br>
+        </div>
+    </div>
+
+    <div class="sales-card">
+        <div class="timer" id="countdown">OFERTA EXPIRA EN: 23:59:59</div>
+        <h2 style="color: #fff; margin-top: 0;">PLAN BANK-KILLER</h2>
+        <div class="price">$10,000 USD</div>
+        
+        <ul class="features">
+            <li>Protección contra Inyección SQL</li>
+            <li>Mitigación DDoS de 2 Terabits</li>
+            <li>IA Proactiva (Zero-Day Defense)</li>
+            <li>Cifrado Post-Cuántico</li>
+        </ul>
+
+        <button class="btn-buy" onclick="window.location.href='/comprar/bank-killer'">
+            ADQUIRIR LICENCIA AHORA
+        </button>
+    </div>
+
+    <script>
+        // Lógica del Monitor de IA
+        const log = document.getElementById('log');
+        const threats = [
+            "Ataque de fuerza bruta bloqueado (IP: 192.168.x.x)",
+            "Intento de exfiltración de datos detenido",
+            "Escaneo de puertos sigiloso mitigado",
+            "Detección de payload malicioso en Capa 7",
+            "Anomalía en protocolo TCP aislada"
+        ];
+
+        setInterval(() => {
+            const time = new Date().toLocaleTimeString();
+            const threat = threats[Math.floor(Math.random() * threats.length)];
+            const isAlert = Math.random() > 0.5;
+            
+            const line = isAlert 
+                ? `[${time}] <span class="alert">AMENAZA:</span> ${threat}... <b>NEUTRALIZADA</b>.<br>`
+                : `[${time}] [INFO] Tráfico legítimo verificado con IA.<br>`;
+            
+            log.innerHTML += line;
+            if (log.childNodes.length > 25) log.removeChild(log.firstChild);
+        }, 2500);
+
+        // Lógica del Temporizador
+        let time = 86399; // 24 horas
+        setInterval(() => {
+            const h = Math.floor(time / 3600);
+            const m = Math.floor((time % 3600) / 60);
+            const s = time % 60;
+            document.getElementById('countdown').innerHTML = 
+                `OFERTA EXPIRA EN: ${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            if (time > 0) time--;
+        }, 1000);
+    </script>
+</body>
+</html>
